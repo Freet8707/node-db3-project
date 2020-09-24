@@ -14,7 +14,7 @@ const findById = async (schemeID) => {
         .select('s.scheme_name', 's.id as scheme_id')
         .where('s.id', schemeID);
 
-    return scheme[0];
+    return scheme;
 }
 
 const findSteps = async (schemeID) => {
@@ -28,8 +28,18 @@ const findSteps = async (schemeID) => {
     return steps
 }
 
+const addStep = async (step, schemeID) => {
+    const newStep = {...step, scheme_id: schemeID};
+
+    const stepAdd = await db('steps as s')
+        .insert(newStep);
+
+    return stepAdd;
+}
+
 module.exports = {
     find,
     findById,
-    findSteps
+    findSteps,
+    addStep
 }
