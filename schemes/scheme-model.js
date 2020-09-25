@@ -46,10 +46,20 @@ const update = async (scheme, ID) => {
 
 }
 
+const remove = async (schemeID) => {
+
+    const removeScheme = await db('schemes as s')
+        .delete()
+        .where('s.id', schemeID)
+
+    return removeScheme
+}
+
 module.exports = {
     find,
     findById,
     findSteps,
     addStep,
-    update
+    update,
+    remove
 }
