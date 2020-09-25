@@ -37,9 +37,19 @@ const addStep = async (step, schemeID) => {
     return stepAdd;
 }
 
+const update = async (scheme, ID) => {
+    const updateScheme = await db('schemes as s')
+        .update(scheme)
+        .where('s.id', ID);
+
+    return updateScheme
+
+}
+
 module.exports = {
     find,
     findById,
     findSteps,
-    addStep
+    addStep,
+    update
 }
